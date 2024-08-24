@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om Sabnis - Professional Interactive Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #3498db;
+            --background-color: #f5f5f5;
+            --card-background: #ffffff;
+            --text-color: #2c3e50;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: default; /* Disable text selection cursor */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--card-background);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            animation: fadeInUp 1s ease-in-out forwards;
+        }
+
+        header {
+            background-color: #f0f0f0;
+            color: var(--text-color);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+            margin-top: 15px;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .contact-info a {
+            color: black;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        .contact-info a:hover {
+            color: #1a73e8;
+        }
+
+        .icon {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .phone-icon {
+            color: #3498db;
+            animation: none;
+        }
+
+        .section {
+            background-color: var(--card-background);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-in-out forwards;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width var(--transition-speed) ease;
+        }
+
+        .section:hover h2::after {
+            width: 100%;
+        }
+
+        .job, .education, .projects { margin-bottom: 1.5rem; }
+
+        .job-title, .education-title, .projects-title {
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .job-title:hover, .education-title:hover, .projects-title:hover {
+            color: var(--secondary-color);
+        }
+
+        ul { list-style-type: disc; padding-left: 1.5rem; }
+
+        li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .skills-container ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .skills-container li {
+            margin-bottom: 10px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .section { padding: 1rem; }
+            .contact-info { flex-direction: column; }
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Adjusting the space between research headings */
+        .research-title {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Om Sabnis</h1>
+            <div class="contact-info">
+                <span><i class="icon">📧</i> <a href="mailto:sabnisom97@gmail.com">sabnisom97@gmail.com</a></span>
+                <span><i class="icon phone-icon">📞</i> (+44) 7767166652</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="education" class="section">
+            <h2>Education</h2>
+            <div class="education">
+                <h3 class="education-title">MSc Petroleum Refining Systems Engineering</h3>
+                <p>University Of Surrey, Guildford | Sep 2020 - Sep 2021</p>
+                <p>(Advanced knowledge of petroleum refining processes, economic analysis, and optimization of operations, developing strong analytical and problem-solving abilities.)</p>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2>Work Experience</h2>
+            <div class="job">
+                <h3 class="job-title">Research Analyst</h3>
+                <p>Vivergo Fuels | Sep 2021 - Present</p>
+                <ul>
+                    <li>Performed market research incorporating quantitative models, optimization, statistical programming and risk analysis of pricing models, derivatives, commodities, inflation and hybrid structures</li>
+                    <li>Constructed and maintained regional and global S&D models for ethanol, softs (wheat, maize, soy), natural gas, power, crude oil, and gasoline, providing comprehensive market insights and forecasts</li>
+                    <li>Developed statistical arbitrage and import parity models for bioethanol, leveraging data analytics and economic indicators to optimize trading strategies and forecast price movements</li>
+                    <li>Developed pricing and hedging models covering energy, freight, refined products</li>
+                    <li>Created optimization models for derivatives trading, energy analysis, and shipping logistics using Python</li>
+                    <li>Developed statistical models for forward forecasting including ARIMA, GARCH, XG boost, LSTM</li>
+                </ul>
+            </div>
+            <div class="job">
+                <h3 class="job-title">Research Assistant</h3>
+                <p>University Of Surrey | Jun 2021 - Aug 2021</p>
+                <ul>
+                    <li>Worked on the removal of micro/nano-plastics from water, fuels</li>
+                    <li>The Brownian motion of the particles was studied using Nanosight and absorbency tests were carried out using the attenuated total reflection-Fourier transform infrared</li>
+                    <li>Efficiency of the fluor pilot plant was examined</li>
+                </ul>
+            </div>
+            <div class="job">
+                <h3 class="job-title">Junior Analyst</h3>
+                <p>NANDAN PETROCHEM LTD. | Jun 2019 - Jul 2020</p>
+                <ul>
+                    <li>Developed valuation models for M&A analysis of regional electricity distribution companies. Models led to successful acquisition deals</li>
+                    <li>Backtested statistical arbitrage strategies for energy futures trading. Increased trading profits by 20%</li>
+                    <li>Built Tableau dashboards for tracking LNG supply-demand trends across major gas hubs</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2>Projects</h2>
+            <div class="projects">
+                <h3 class="projects-title">Portfolio Construction using Black-Litterman Model and Factors</h3>
+                <ul>
+                    <li>Implemented the Black-Litterman model for portfolio optimization</li>
+                    <li>Incorporated factor analysis to enhance asset allocation strategies</li>
+                    <li>Analyzed performance and risk characteristics of the constructed portfolio</li>
+                    <li>Compared the Black-Litterman model with traditional portfolio optimization methods</li>
+                    <li>Developed and backtested the portfolio under various market conditions to assess robustness</li>
+                </ul>
+            </div>
+            <div class="projects">
+                <h3 class="projects-title">Deep Learning for Financial Time Series</h3>
+                <ul>
+                    <li>Explored LSTM models' effectiveness in predicting stock price movements</li>
+                    <li>Implemented advanced feature selection and dimensionality reduction techniques</li>
+                    <li>Tested and optimized over 200 LSTM architectures</li>
+                    <li>Evaluated model using three distinct datasets: SOM & DT based, PCA based, and ISOMAP based</li>
+                    <li>Assessed predictive capabilities across different dimensionality reduction approaches</li>
+                </ul>
+            </div>
+            <div class="projects">
+                <h3 class="projects-title">Global Crude Oil Production Trends and Future Outlook Analysis</h3>
+                <ul>
+                    <li>Conducted a comprehensive literature review on crude oil production trends and techniques</li>
+                    <li>Analyzed current sources and types of crude oil being discovered and produced globally</li>
+                    <li>Predicted possible future trends and outcomes in the oil industry</li>
+                    <li>Proposed solution strategies for more efficient oil exploration techniques</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="research" class="section">
+            <h2>Research</h2>
+            <div class="research">
+                <h3 class="research-title">Analysis of Ni-Coated CNT Reinforced On Ti-Matrix</h3>
+                <ul>
+                    <li>Examined the chemistry of Ni-coating on CNTs reinforced in titanium matrix</li>
+                    <li>Analyzed nanoelectronics of Ni-coated CNTs in titanium composites</li>
+                    <li>Utilized scientific formulae and equations to describe CNT physical behavior</li>
+                    <li>Explored future scope and applications of these advanced materials</li>
+                    <li>Discussed implications for nanoelectronics and composite technology</li>
+                    <li><b>Paper ID:</b> IJSRDV7I60253</li>
+                    <li><b>Published In:</b> Volume 7, Publication Date: 01/09/2019 Issue 4, (Pages: 83-84)</li>
+                </ul>
+            </div>
+            <div class="research">
+                <h3 class="research-title">The Study On Superconductivity And Its Applications</h3>
+                <ul>
+                    <li>Examined worldwide production methods and emerging technologies in the field</li>
+                    <li>Conducted a discrete study on the phenomenon of Superconductivity</li>
+                    <li>Explained the concept in-depth using scientific formulae</li>
+                    <li>Critically analyzed and systematically derived key equations</li>
+                    <li>Discussed a wide variety of applications for superconductivity</li>
+                    <li><b>Paper ID:</b> IJSRDV6I40665</li>
+                    <li><b>Published In:</b> Volume 6, Publication Date: 01/07/2018 Issue 4, (Pages: 822-824)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <ul>
+                    <li>Python</li>
+                    <li>MATLAB</li>
+                    <li>GAMS</li>
+                </ul>
+                <ul>
+                    <li>PowerBI</li>
+                    <li>q/KDB+</li>
+                    <li>SQL</li>
+                </ul>
+                <ul>
+                    <li>Dymola</li>
+                    <li>Simulink</li>
+                    <li>Aspen+</li>
+                </ul>
+                <ul>
+                    <li>Refinitiv</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="certifications" class="section">
+            <h2>Certifications</h2>
+            <p><strong>Certificate in Quantitative Finance (CQF)</strong></p>
+            <ul>
+                <li>Advanced mathematical and statistical techniques for financial modeling</li>
+                <li>Derivatives pricing and hedging strategies and stochastic calculus applications in finance</li>
+                <li>Risk management methodologies and practices</li>
+                <li>Machine learning, Portfolio management theories, asset allocation strategies, and optimization techniques</li>
+                <li>Quantitative analytics and advanced statistical methods for financial data analysis</li>
+                <li>Portfolio management theories, asset allocation strategies, and optimization techniques</li>
+                <li>Equity valuation models, factor investing, and currency market dynamics</li>
+                <li>Algorithmic trading strategies and high-frequency trading concepts</li>
+            </ul>
+        </section>
+
+        <section id="achievements" class="section">
+            <h2>Interests and Achievements</h2>
+            <ul>
+                <li>Chess State Champion (2007, 2010)</li>
+                <li>Certified Ethical Hacker (v9)</li>
+                <li>Event Head of college annual festival (Enthusia)</li>
+                <li>Volunteer at NGO (BHUMI)</li>
+                <li>Reading Scientific literature, playing musical instruments, hiking</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
